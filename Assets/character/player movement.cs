@@ -6,10 +6,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 7f;
 
     private Rigidbody2D rb;
+    private Animator animator;       // AJOUT ANIMATION
+    private SpriteRenderer sr;       // AJOUT ANIMATION
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();       // AJOUT ANIMATION
+        sr = GetComponent<SpriteRenderer>();       // AJOUT ANIMATION
     }
 
     private void Update()
@@ -26,5 +30,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+
+        // ----- AJOUT ANIMATION (le code ci-dessus est inchangé) -----
+        animator.SetBool("IsRunning", x != 0f);
+
+        if (x > 0f) sr.flipX = false;
+        else if (x < 0.1f) sr.flipX = true;
     }
 }
