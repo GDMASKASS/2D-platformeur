@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private Animator _animator;
 
     private Rigidbody2D rb;
 
@@ -18,6 +19,12 @@ public class PlayerMovement : MonoBehaviour
         float x = 0f;
         if (Input.GetKey(KeyCode.D)) x = 1f;
         if (Input.GetKey(KeyCode.Q)) x = -1f;
+        if (input != 0){
+            _aniamtor.SetBool("is running", true);
+        }
+        else{
+            _animator.setBool("isrunning", false);
+        }
 
         rb.linearVelocity = new Vector2(x * speed, rb.linearVelocity.y);
 
