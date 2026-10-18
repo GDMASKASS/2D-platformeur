@@ -1,14 +1,22 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private string gameOverSceneName = "GameOver";
+    [SerializeField] private float delay = 1f;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision avec : " + collision.gameObject.name + " / tag : " + collision.gameObject.tag);
-
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
+            Invoke(nameof(LoadGameOver), delay);
         }
+    }
+
+    private void LoadGameOver()
+    {
+        SceneManager.LoadScene(gameOverSceneName);
     }
 }
