@@ -45,6 +45,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isGrounded = false;
+        isGrounded = false
+
+    public class PlayerCoins : MonoBehaviour
+    {
+        [SerializeField] private CoinManager cm;
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag("Coin"))
+            {
+                cm.coinCount++;
+                Destroy(other.gameObject);
+            }
+        }
     }
+}
 }
